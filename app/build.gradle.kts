@@ -50,8 +50,6 @@ android {
 
 
 dependencies {
-
-    // Compose BOM keeps versions in sync
     val composeBom = platform("androidx.compose:compose-bom:2024.10.01")
     implementation(composeBom)
     androidTestImplementation(composeBom)

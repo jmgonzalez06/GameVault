@@ -21,3 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "GameVault"
 include(":app")
+include(":app")
+ 

@@ -59,5 +59,6 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.compose.v283)
+    implementation("androidx.navigation:navigation-compose:2.8.3")
     implementation(libs.androidx.lifecycle.viewmodel.compose.v286)
 }

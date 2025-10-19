@@ -6,6 +6,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import com.example.gamevault.data.GameList
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -24,17 +27,42 @@ fun WishlistScreen(
             )
         }
     ) { padding ->
-        // Placeholder content
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(padding),
-            contentAlignment = Alignment.Center
-        ) {
-            Text(
-                text = "Your wishlist is empty.\nAdd games from the Home screen!",
-                style = MaterialTheme.typography.bodyLarge
-            )
+        val items = GameList.games.filter { isInWishlist(it.id) }
+
+        if (items.isEmpty()) {
+            Box(
+                modifier = Modifier.fillMaxSize().padding(padding),
+                contentAlignment = Alignment.Center
+            ) {
+                Text("Your wishlist is empty.\nAdd games from Home!")
+            }
+        } else {
+            LazyColumn(
+                modifier = Modifier.fillMaxSize().padding(padding)
+            ) {
+                items(items) { game ->
+                    Card(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp, vertical = 8.dp)
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Column(Modifier.weight(1f)) {
+                                Text(game.title, style = MaterialTheme.typography.titleMedium)
+                                Text("${game.genre}  •  ⭐ ${game.rating}")
+                            }
+                            FilledTonalButton(onClick = { onToggleWishlist(game.id) }) {
+                                Text("Remove")
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

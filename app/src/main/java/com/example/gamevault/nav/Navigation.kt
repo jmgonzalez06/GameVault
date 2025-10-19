@@ -11,6 +11,9 @@ import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.example.gamevault.data.GameList
 import androidx.compose.material3.ExperimentalMaterial3Api
+//TEMPORARY WISHLIST STATE (remove when GameViewModel is added)
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.saveable.rememberSaveable
 
 @OptIn(ExperimentalMaterial3Api::class)
 object Routes {
@@ -22,14 +25,21 @@ object Routes {
 @Composable
 fun Navigation(onToggleWishlist: (Int) -> Unit = {},
                isInWishlist: (Int) -> Boolean = { false }) {
+    // TEMP dev-only state (remove when ViewModel is added)
+    val wishlistIds = rememberSaveable { mutableStateListOf<Int>() }
+    val toggle: (Int) -> Unit = { id ->
+        if (id in wishlistIds) wishlistIds.remove(id) else wishlistIds.add(id)
+    }
+    //END OF TEMP
+    val check: (Int) -> Boolean = { id -> id in wishlistIds }
     val nav = rememberNavController()
     NavHost(navController = nav, startDestination = Routes.HOME) {
         composable(Routes.HOME) {
             HomeScreen(
                 onOpenDetails = { gameId -> nav.navigate("${Routes.DETAILS}/$gameId") },
                 onOpenWishlist = { nav.navigate(Routes.WISHLIST) },
-                onToggleWishlist = onToggleWishlist,
-                isInWishlist = isInWishlist
+                onToggleWishlist = toggle,    // TEMP function
+                isInWishlist = check          // TEMP function
             )
         }
         composable(
@@ -44,13 +54,17 @@ fun Navigation(onToggleWishlist: (Int) -> Unit = {},
             DetailsScreen(
                 gameId = id,
                 onBack = { nav.popBackStack() },
-                onToggleWishlist = onToggleWishlist,
-                isInWishlist = isInWishlist
+                onToggleWishlist = toggle,   // TEMP state
+                isInWishlist = check         // TEMP state
             )
         }
 
         composable(Routes.WISHLIST) {
-            WishlistScreen(onBack = { nav.popBackStack() })
+            WishlistScreen(
+                onBack = { nav.popBackStack() },
+                onToggleWishlist = toggle,   // TEMP state
+                isInWishlist = check         // TEMP state
+            )
         }
     }
 }

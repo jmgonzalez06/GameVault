@@ -46,19 +46,21 @@ The project demonstrates the use of key Android concepts taught in class:
 
 ## Screenshots
 
-Place screenshots of each screen below.
+**Home Screen**
 
-**Home Screen**  
 ![Home Screen](Screenshots/home_screen.png)
 
 **Details Screen**  
+
 ![Details Screen](Screenshots/details_screen_1.png)
 ![Details Screen](Screenshots/details_screen_2.png)
 
 **Wishlist Screen**  
+
 ![Whislist Screen](Screenshots/whishlist_screen.png)
 
 **Screen Rotation**
+
 ![Screen Rotation](Screenshots/screen_rotation.png)
 
 ## How It Works

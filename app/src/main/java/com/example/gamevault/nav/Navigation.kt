@@ -9,7 +9,6 @@ import com.example.gamevault.ui.screens.HomeScreen
 import com.example.gamevault.ui.screens.WishlistScreen
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
-import com.example.gamevault.data.GameList
 import androidx.compose.material3.ExperimentalMaterial3Api
 //TEMPORARY WISHLIST STATE (remove when GameViewModel is added)
 import androidx.compose.runtime.mutableStateListOf
@@ -62,8 +61,11 @@ fun Navigation(onToggleWishlist: (Int) -> Unit = {},
         composable(Routes.WISHLIST) {
             WishlistScreen(
                 onBack = { nav.popBackStack() },
-                onToggleWishlist = toggle,   // TEMP state
-                isInWishlist = check         // TEMP state
+                onToggleWishlist = toggle,
+                isInWishlist = check,
+                onOpenDetails = { gameId ->
+                    nav.navigate("${Routes.DETAILS}/$gameId")
+                }
             )
         }
     }

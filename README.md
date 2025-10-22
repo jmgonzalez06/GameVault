@@ -2,8 +2,8 @@
 
 ### CPSC 411A-02 – Team Project
 **Team Members:**
-- Hisham Panamthodi Kajahussain – CWID:
-- Andrew Vu – CWID:
+- Hisham Panamthodi Kajahussain – CWID: 885147090
+- Andrew Vu – CWID: 884555095
 - Jose Manuel Gonzalez Alfaro – CWID:
 
 

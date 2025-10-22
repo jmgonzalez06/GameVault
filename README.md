@@ -52,10 +52,11 @@ Place screenshots of each screen below.
 ![Home Screen](Screenshots/home_screen.png)
 
 **Details Screen**  
-`[Insert Details Screen Screenshot Here]`
+![Details Screen](Screenshots/details_screen_1.png)
+![Details Screen](Screenshots/details_screen_2.png)
 
 **Wishlist Screen**  
-`[Insert Wishlist Screen Screenshot Here]`
+![Whislist Screen](Screenshots/wishlist_screen.png)
 
 
 ## How It Works

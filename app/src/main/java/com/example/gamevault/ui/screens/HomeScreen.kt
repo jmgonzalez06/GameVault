@@ -17,6 +17,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.gamevault.data.GameList
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.foundation.Image
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.foundation.background
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.ButtonDefaults
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -50,26 +59,70 @@ fun HomeScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(horizontal = 16.dp, vertical = 8.dp)
-                            .clickable { onOpenDetails(game.id) }
+                            .clickable { onOpenDetails(game.id) },
+                        shape = RoundedCornerShape(16.dp)
                     ) {
-                        Row(
+                        Box(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(16.dp),
-                            verticalAlignment = Alignment.CenterVertically
+                                .height(180.dp)
+                                .clip(RoundedCornerShape(16.dp))
                         ) {
-                            Column(Modifier.weight(1f)) {
-                                Text(
-                                    game.title,
-                                    style = MaterialTheme.typography.titleMedium,
-                                    fontWeight = FontWeight.SemiBold
-                                )
-                                Text(game.genre, style = MaterialTheme.typography.bodyMedium)
-                                Text("⭐ ${game.rating}", style = MaterialTheme.typography.bodySmall)
-                            }
-                            val saved = isInWishlist(game.id)
-                            FilledTonalButton(onClick = { onToggleWishlist(game.id) }) {
-                                Text(if (saved) "Remove" else "Save")
+                            // Banner image
+                            Image(
+                                painter = painterResource(id = game.imageResId),
+                                contentDescription = "${game.title} banner",
+                                modifier = Modifier.matchParentSize(),
+                                contentScale = ContentScale.Crop
+                            )
+                            // Gradient overlay for text legibility
+                            Box(
+                                modifier = Modifier
+                                    .matchParentSize()
+                                    .background(
+                                        Brush.verticalGradient(
+                                            colors = listOf(
+                                                Color.Transparent,
+                                                Color.Black.copy(alpha = 0.6f)
+                                            )
+                                        )
+                                    )
+                            )
+                            // Text + Save/Remove button overlay at bottom
+                            Box(
+                                modifier = Modifier
+                                    .align(Alignment.BottomStart)
+                                    .fillMaxWidth()
+                                    .padding(16.dp)
+                            ) {
+                                Column(
+                                    modifier = Modifier.align(Alignment.BottomStart),
+                                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                                ) {
+                                    Text(
+                                        text = game.title,
+                                        style = MaterialTheme.typography.titleLarge,
+                                        color = Color.White,
+                                        fontWeight = FontWeight.Bold
+                                    )
+                                    Text(
+                                        text = "${game.genre}  •  ⭐ ${game.rating}",
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        color = Color.LightGray
+                                    )
+                                }
+                                val saved = isInWishlist(game.id)
+                                FilledTonalButton(
+                                    onClick = { onToggleWishlist(game.id) },
+                                    modifier = Modifier.align(Alignment.BottomEnd),
+                                    colors = ButtonDefaults.filledTonalButtonColors(
+                                        containerColor = Color.White.copy(alpha = 0.9f),
+                                        contentColor = Color.Black
+                                    ),
+                                    shape = RoundedCornerShape(12.dp)
+                                ) {
+                                    Text(if (saved) "Remove" else "Save")
+                                }
                             }
                         }
                     }

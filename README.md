@@ -58,6 +58,8 @@ Place screenshots of each screen below.
 **Wishlist Screen**  
 ![Whislist Screen](Screenshots/whishlist_screen.png)
 
+**Screen Rotation**
+![Screen Rotation](Screenshots/screen_rotation.png)
 
 ## How It Works
 

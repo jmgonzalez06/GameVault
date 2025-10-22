@@ -63,5 +63,6 @@ dependencies {
     implementation(libs.androidx.navigation.compose.v283)
     implementation("androidx.navigation:navigation-compose:2.8.3")
     implementation(libs.androidx.lifecycle.viewmodel.compose.v286)
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.6")
     implementation("androidx.compose.runtime:runtime-saveable") //TEMP
 }

@@ -10,9 +10,9 @@ import com.example.gamevault.ui.screens.WishlistScreen
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import androidx.compose.material3.ExperimentalMaterial3Api
-//TEMPORARY WISHLIST STATE (remove when GameViewModel is added)
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.gamevault.viewmodel.GameViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 object Routes {
@@ -22,23 +22,22 @@ object Routes {
 }
 
 @Composable
-fun Navigation(onToggleWishlist: (Int) -> Unit = {},
-               isInWishlist: (Int) -> Boolean = { false }) {
-    // TEMP dev-only state (remove when ViewModel is added)
-    val wishlistIds = rememberSaveable { mutableStateListOf<Int>() }
-    val toggle: (Int) -> Unit = { id ->
-        if (id in wishlistIds) wishlistIds.remove(id) else wishlistIds.add(id)
-    }
-    //END OF TEMP
-    val check: (Int) -> Boolean = { id -> id in wishlistIds }
+fun Navigation() {
+    val vm: GameViewModel = viewModel()
+    val uiState = vm.ui.collectAsStateWithLifecycle()
+
+    val isSaved: (Int) -> Boolean = { id -> uiState.value.wishlistIds.contains(id) }
+    val toggle: (Int) -> Unit = { id -> vm.toggleWishlist(id) }
+    val wishlist = uiState.value.allGames.filter { it.id in uiState.value.wishlistIds }
+
     val nav = rememberNavController()
     NavHost(navController = nav, startDestination = Routes.HOME) {
         composable(Routes.HOME) {
             HomeScreen(
                 onOpenDetails = { gameId -> nav.navigate("${Routes.DETAILS}/$gameId") },
                 onOpenWishlist = { nav.navigate(Routes.WISHLIST) },
-                onToggleWishlist = toggle,    // TEMP function
-                isInWishlist = check          // TEMP function
+                onToggleWishlist = toggle,
+                isInWishlist = isSaved
             )
         }
         composable(
@@ -53,8 +52,8 @@ fun Navigation(onToggleWishlist: (Int) -> Unit = {},
             DetailsScreen(
                 gameId = id,
                 onBack = { nav.popBackStack() },
-                onToggleWishlist = toggle,   // TEMP state
-                isInWishlist = check         // TEMP state
+                onToggleWishlist = toggle,
+                isInWishlist = isSaved
             )
         }
 
@@ -62,7 +61,7 @@ fun Navigation(onToggleWishlist: (Int) -> Unit = {},
             WishlistScreen(
                 onBack = { nav.popBackStack() },
                 onToggleWishlist = toggle,
-                isInWishlist = check,
+                isInWishlist = isSaved,
                 onOpenDetails = { gameId ->
                     nav.navigate("${Routes.DETAILS}/$gameId")
                 }

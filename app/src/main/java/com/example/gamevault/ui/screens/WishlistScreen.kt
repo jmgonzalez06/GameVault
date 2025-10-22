@@ -37,7 +37,7 @@ fun WishlistScreen(
 ) {
     Scaffold(
         topBar = {
-            TopAppBar(
+            CenterAlignedTopAppBar(
                 title = { Text("Wishlist") },
                 navigationIcon = {
                     TextButton(onClick = onBack) { Text("Back") }

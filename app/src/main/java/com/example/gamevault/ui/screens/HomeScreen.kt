@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import com.example.gamevault.data.GameList
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.foundation.Image
-import androidx.compose.ui.draw.clip
+//import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -26,6 +26,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.foundation.background
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.runtime.remember
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -54,7 +55,15 @@ fun HomeScreen(
                     .fillMaxSize()
                     .padding(padding)
             ) {
-                items(GameList.games) { game ->
+                items(GameList.games, key = { it.id }) { game ->
+                    val bannerFade = remember {
+                        Brush.verticalGradient(
+                            colors = listOf(
+                                Color.Transparent,
+                                Color.Black.copy(alpha = 0.6f)
+                            )
+                        )
+                    }
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -65,8 +74,7 @@ fun HomeScreen(
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .height(180.dp)
-                                .clip(RoundedCornerShape(16.dp))
+                                .height(160.dp)
                         ) {
                             // Banner image
                             Image(
@@ -79,14 +87,7 @@ fun HomeScreen(
                             Box(
                                 modifier = Modifier
                                     .matchParentSize()
-                                    .background(
-                                        Brush.verticalGradient(
-                                            colors = listOf(
-                                                Color.Transparent,
-                                                Color.Black.copy(alpha = 0.6f)
-                                            )
-                                        )
-                                    )
+                                    .background(bannerFade)
                             )
                             // Text + Save/Remove button overlay at bottom
                             Box(

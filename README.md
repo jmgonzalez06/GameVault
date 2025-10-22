@@ -6,7 +6,6 @@
 - Andrew Vu – CWID:
 - Jose Manuel Gonzalez Alfaro – CWID:
 
----
 
 ## Overview
 
@@ -19,7 +18,6 @@ The project demonstrates the use of key Android concepts taught in class:
 - **Dynamic UI updates** through Compose reactive state
 - **Clean and responsive layout** designed with Material 3
 
----
 
 ## Features
 
@@ -31,7 +29,6 @@ The project demonstrates the use of key Android concepts taught in class:
 
 - **Wishlist Screen:** Displays saved games in visually rich banner cards with quick remove options.
 
----
 
 ## Technical Implementation
 
@@ -46,7 +43,6 @@ The project demonstrates the use of key Android concepts taught in class:
   The wishlist state is stored in the `GameViewModel` and shared across the Home, Details, and Wishlist screens.  
   ViewModel state persists through configuration changes (e.g., rotation).
 
----
 
 ## Screenshots
 
@@ -61,7 +57,6 @@ Place screenshots of each screen below.
 **Wishlist Screen**  
 `[Insert Wishlist Screen Screenshot Here]`
 
----
 
 ## How It Works
 
@@ -79,10 +74,9 @@ Place screenshots of each screen below.
     - Cards display game banners, titles, and quick remove buttons.
     - Tapping a card opens the Details screen for that game.
 
----
 
 ## App Structure
-
+```
 com.example.gamevault/
 │
 ├── data/
@@ -98,9 +92,8 @@ com.example.gamevault/
 │   └── Navigation.kt
 │
 └── viewmodel/
-└── GameViewModel.kt
-
----
+    └── GameViewModel.kt
+```
 
 ## Requirements Checklist
 
@@ -113,7 +106,6 @@ com.example.gamevault/
 | Functional and clean UI                    | Yes          | Material 3 theme |
 | Bonus: visually appealing design           | Yes          | Banner-style cards and consistent layout |
 
----
 
 ## How to Run
 
@@ -124,14 +116,12 @@ com.example.gamevault/
 2. Open the project in Android Studio (Giraffe or newer).
 3. Build and run on an emulator or physical Android device running API 24 or higher.
 
----
 
 ## Demo Video
 
 Insert the link to the unlisted YouTube video below:  
 `[Insert Demo Video Link Here]`
 
----
 
 ## License
 

@@ -56,7 +56,7 @@ Place screenshots of each screen below.
 ![Details Screen](Screenshots/details_screen_2.png)
 
 **Wishlist Screen**  
-![Whislist Screen](Screenshots/wishlist_screen.png)
+![Whislist Screen](Screenshots/whishlist_screen.png)
 
 
 ## How It Works

@@ -49,7 +49,7 @@ The project demonstrates the use of key Android concepts taught in class:
 Place screenshots of each screen below.
 
 **Home Screen**  
-`[Insert Home Screen Screenshot Here]`
+![Home Screen](Screenshots/home_screen.png)
 
 **Details Screen**  
 `[Insert Details Screen Screenshot Here]`

@@ -124,12 +124,12 @@ com.example.gamevault/
 
 ## Demo Video
 
-Insert the link to the unlisted YouTube video below:  
-`[Insert Demo Video Link Here]`
+`https://youtu.be/uRMDQYjIFA4`
 
 
 ## License
 
 This project was created for **CPSC 411A-02 (Mobile Device Application Programming for Android)**  
 at **California State University, Fullerton.**  
+
 For educational purposes only.
